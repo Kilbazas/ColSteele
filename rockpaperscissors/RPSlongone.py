@@ -1,60 +1,400 @@
-  
-from random import randint
-
-player_wins = 0
-computer_wins = 0
-winning_score = 3
-
-while player_wins < winning_score and computer_wins < winning_score:
-    print(f"Player Score: {player_wins} Compurter Score: {computer_wins}")
-    print("Rock...")
-    print("Paper...")
-    print("Scissors...")
+import random
 
 
-    player = input("Player, make your move: ").lower()
-    if player == "quit" or player == "q":
-        break
-    rand_num = randint(0,2)
-    if rand_num == 0:
-        computer = "rock"
-    elif rand_num == 1:
-        computer = "paper"
-    else:
-        computer = "scissors"
+answer = input("Play game? ('y' to continue) ").lower()
+print(" ")
+
+while answer == "y":
+
+    vocabDictionary = {      #dictionary/key pairs for definitions
+      "about":"apie",
+"again":"vėl",
+"age":"amžius",
+"air":"oras",
+"all":"visi",
+"always":"visada",
+"and":"ir",
+"animal":"gyvūnas",
+"answer":"atsakyti",
+"appear":"atsirasti",
+"are":"yra",
+"ask":"klausti",
+"back":"atgal",
+"base":"bazė",
+"be":"būti",
+"beauty":"grožis",
+"bed":"lova",
+"begin":"pradėti",
+"best":"geriausias",
+"between":"tarp",
+"big":"didelis",
+"bird":"paukštis",
+"black":"juodas",
+"blue":"mėlyna",
+"boat":"valtis",
+"body":"kūnas",
+"book":"knyga",
+"box":"dėžė",
+"boy":"berniukas",
+"bring":"atnešti",
+"brought":"atnešė",
+"build":"statyti",
+"busy":"užsiėmes",
+"but":"bet",
+"call":"skambinti",
+"came":"atėjo",
+"can":"galėti",
+"car":"automobilis",
+"care":"priežiūra",
+"cause":"priežastis",
+"center":"centre",
+"change":"keisti",
+"check":"tikrinti",
+"children":"vaikai",
+"city":"miestas",
+"class":"klasė",
+"clear":"aišku",
+"close":"Uždaryti",
+"color":"spalva",
+"come":"ateiti",
+"common":"dažnas",
+"correct":"teisingas",
+"country":"šalis",
+"cover":"viršelis",
+"cross":"kirsti",
+"cry":"verkti",
+"dark":"tamsa",
+"day":"diena",
+"decide":"nuspręsti",
+"deep":"gilus",
+"did":"padarė",
+"do":"daryti",
+"dog":"šuo",
+"door":"durys",
+"down":"žemyn",
+"draw":"piešti",
+"drive":"vairuoti",
+"dry":"sausas",
+"each":"kiekvienas",
+"early":"anksti",
+"earth":"žemė",
+"ease":"lengvumas",
+"east":"rytai",
+"eat":"valgyti",
+"example":"pavyzdys",
+"eye":"akis",
+"face":"veidas",
+"fact":"faktas",
+"fall":"kristi",
+"family":"šeima",
+"farm":"ūkis",
+"fast":"greitas",
+"father":"tėvas",
+"feel":"jausti",
+"feet":"pėdos",
+"field":"laukas",
+"figure":"figūra",
+"find":"rasti",
+"fire":"ugnis",
+"fish":"žuvis",
+"five":"penki",
+"fly":"skristi",
+"follow":"sekti",
+"food":"maistas",
+"foot":"pėda",
+"force":"jėga",
+"form":"forma",
+"found":"rasti",
+"four":"keturi",
+"friend":"draugas",
+"full":"pilnas",
+"game":"žaidimas",
+"gave":"davė",
+"get":"gauti",
+"girl":"mergina",
+"give":"duoti",
+"go":"eiti",
+"gold":"auksas",
+"good":"geras",
+"great":"puikus",
+"green":"žalias",
+"group":"grupė",
+"grow":"augti",
+"had":"turėjo",
+"half":"pusė",
+"hand":"ranka",
+"happen":"atsitikti",
+"hard":"sunku",
+"has":"turi",
+"have":"turėti",
+"he":"jis",
+"head":"galva",
+"hear":"girdėti",
+"heat":"karštis",
+"help":"padėti",
+"her":"ją",
+"high":"aukštas",
+"him":"jį",
+"his":"jo",
+"hold":"laikytis",
+"home":"namai",
+"horse":"arklys",
+"hot":"karšta",
+"hour":"valanda",
+"house":"namas",
+"how":"kaip",
+"hundred":"šimtas",
+"I":"Aš",
+"idea":"idėja",
+"if":"jei",
+"in":"į",
+"is":"yra",
+"island":"sala",
+"it":"tai",
+"keep":"laikyti",
+"king":"karalius",
+"know":"žinoti",
+"land":"žemė",
+"language":"kalba",
+"large":"didelis",
+"last":"paskutinis",
+"late":"vėlai",
+"laugh":"juoktis",
+"lead":"vadovauti",
+"learn":"mokytis",
+"leave":"palikti",
+"left":"kairė",
+"let":"leisti",
+"letter":"laiškas",
+"life":"gyvenimas",
+"light":"šviesa",
+"line":"linija",
+"list":"sąrašas",
+"listen":"klausyti",
+"long":"ilgas",
+"look":"žiūrėti",
+"love":"meilė",
+"low":"žemas",
+"main":"pagrindinis",
+"make":"padaryti",
+"man":"vyras",
+"many":"daug",
+"map":"žemėlapis",
+"maybe":"galbūt",
+"me":"aš",
+"measure":"matuoti",
+"might":"gali",
+"mile":"mylia",
+"minute":"minutė",
+"money":"pinigai",
+"moon":"mėnulis",
+"more":"daugiau",
+"morning":"rytas",
+"mother":"motina",
+"mountain":"kalnas",
+"move":"judėti",
+"music":"muzika",
+"must":"privalėti",
+"my":"mano",
+"name":"vardas",
+"near":"šalia",
+"never":"niekada",
+"new":"naujas",
+"next":"kitas",
+"night":"naktis",
+"no":"ne",
+"nothing":"niekas",
+"notice":"pastebėti",
+"noun":"daiktavardis",
+"now":"dabar",
+"number":"numeris",
+"numeral":"skaitvardis",
+"object":"objektas",
+"off":"išjungti",
+"often":"dažnai",
+"old":"senas",
+"on":"ant",
+"one":"vienas",
+"only":"tik",
+"open":"atviras",
+"or":"arba",
+"other":"kitas",
+"out":"išeiti",
+"page":"puslapis",
+"paper":"popierius",
+"part":"dalis",
+"people":"žmonės",
+"person":"asmuo",
+"picture":"paveikslėlis",
+"piece":"dalis",
+"place":"vieta",
+"plain":"paprastas",
+"plan":"planas",
+"plane":"lėktuvas",
+"plant":"augalas",
+"play":"žaisti",
+"point":"taškas",
+"port":"uostas",
+"pose":"pozuoti",
+"pound":"svaras",
+"power":"galia",
+"press":"spausti",
+"problem":"problema",
+"product":"produktas",
+"pull":"traukti",
+"put":"įdėti",
+"question":"klausimas",
+"quick":"greitas",
+"rain":"lietus",
+"reach":"pasiekti",
+"read":"skaityti",
+"ready":"pasiruošę",
+"real":"tikras",
+"record":"įrašas",
+"red":"raudona",
+"remember":"prisiminti",
+"river":"upė",
+"road":"kelias",
+"rock":"uola",
+"room":"kambarys",
+"round":"apvalus",
+"rule":"taisyklė",
+"run":"bėgti",
+"said":"sakė",
+"say":"sakyti",
+"school":"mokykla",
+"science":"mokslas",
+"sea":"jūra",
+"second":"antras",
+"see":"matyti",
+"sentence":"sakinys",
+"serve":"tarnauti",
+"shape":"figūra",
+"she":"ji",
+"ship":"laivas",
+"short":"trumpas",
+"simple":"paprastas",
+"sing":"dainuoti",
+"sit":"sėdėti",
+"six":"šeši",
+"size":"dydis",
+"sleep":"miegoti",
+"slow":"lėtas",
+"small":"mažas",
+"snow":"sniegas",
+"song":"daina",
+"sound":"garsas",
+"south":"pietūs",
+"special":"ypatingas",
+"spell":"burtas",
+"stand":"stovėti",
+"star":"žvaigždė",
+"start":"pradėti",
+"stay":"likti",
+"step":"žingsnis",
+"story":"istorija",
+"street":"gatvė",
+"strong":"stiprus",
+"study":"studijuoti",
+"sun":"saulė",
+"sure":"tikrai",
+"surface":"paviršius",
+"table":"stalas",
+"tail":"uodega",
+"take":"imti",
+"talk":"kalbėti",
+"teach":"mokyti",
+"tell":"sakyti",
+"ten":"dešimt",
+"test":"testas",
+"that":"kad",
+"their":"jų",
+"them":"juos",
+"then":"tada",
+"there":"ten",
+"they":"jie",
+"thing":"daiktas",
+"think":"galvoti",
+"this":"tai",
+"thousand":"tūkstantis",
+"three":"trys",
+"through":"per",
+"time":"laikas",
+"together":"kartu",
+"took":"paėmė",
+"town":"miestas",
+"travel":"kelionė",
+"tree":"medis",
+"true .":"tiesa .",
+"try":"bandyti",
+"turn":"sukti",
+"two":"du",
+"up":"aukštyn",
+"use":"naudoti",
+"voice":"balsas",
+"wait":"laukti",
+"walk":"vaikščioti",
+"want":"norėti",
+"war":"karas",
+"warm":"šiltas",
+"was":"buvo",
+"watch":"žiūrėti",
+"water":"vanduo",
+"way":"būdu",
+"we":"mes",
+"week":"savaitė",
+"weight":"svoris",
+"were":"buvo",
+"west":"vakarai",
+"what":"ką",
+"wheel":"ratas",
+"when":"kada",
+"where":"kur",
+"which":"kuri",
+"white":"balta",
+"whole":"visas",
+"why":"kodėl",
+"will":"valia",
+"wind":"vėjas",
+"with":"su",
+"wood":"mediena",
+"word":"žodis",
+"work":"dirbti",
+"world":"pasaulis",
+"would":"norėčiau",
+"write":"rašyti",
+"year":"metai",
+"yes":"taip",
+"you":"tu",
+"young":"jaunas",
+        }
+
+    keyword_list = list(vocabDictionary.keys()) #turns words into a list
+
+    random.shuffle(keyword_list) #shuffle keywords
+    correct = 0
+    wrong = 0
+    for keyword in keyword_list:
+        display = "{}"
+     
+        print(display.format(keyword))
+        userInputAnswer = input("ANSWER: ")
+        print(vocabDictionary[keyword])
+        print(" ")
+
+        if userInputAnswer == (vocabDictionary[keyword]):
+            print("CORRECT")
+            correct += 1
+        else:
+            print("WRONG")
+            wrong += 1
+        print('_'*25)
+        print((f"FINAL SCORES... Correct: {correct} Wrong: {wrong}"))#line separator
         
-    print(f"Computer plays {computer}")
-    
-    if player == computer:
-        print("It's a tie!")
-    elif player == "rock":
-        if computer == "scissors":
-            print("player wins!")
-            player_wins += 1
-        else:
-            print("computer wins!")
-            computer_wins += 1
-    elif player == "paper":
-        if computer == "rock":
-            print("player wins!")
-            player_wins += 1
-        else:
-            print("computer wins!")
-            computer_wins += 1
-    elif player == "scissors":
-        if computer == "paper":
-            print("player wins!")
-            player_wins += 1
-        else:
-            print("computer wins!")
-            computer_wins += 1
-    else:
-        print("enter a valid move")
-        
-if player_wins > computer_wins:
-    print("CONGRATs, YOU WON!")
-elif player_wins == computer_wins:
-    print(" IT'S A TIE")
-else:
-    print("OHH NO... COMPUTER WON...")
-print((f"FINAL SCORES... Player: {player_wins} Computer: {computer_wins}"))
+    # final score
+    displayScore = "SCORE: {} correct and {} wrong"
+    print(displayScore.format(correct, wrong))
+    answer = input("Play game? ('y' to continue) ").lower()
+
+print(" ")
+print("Thanks for playing")
